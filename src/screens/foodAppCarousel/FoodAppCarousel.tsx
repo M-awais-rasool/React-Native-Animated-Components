@@ -14,9 +14,10 @@ import {
   PapularCard,
 } from '../../components/FoodAppCarousel';
 
-export default function FoodAppCarousel() {
+export default function FoodAppCarousel(props: any) {
   const [flag, setFlag] = useState(false);
   const scrollY = useRef(new Animated.Value(0)).current;
+  const {navigation} = props;
 
   const isActive = (id: any) => {
     setFlag(!flag);
@@ -93,6 +94,7 @@ export default function FoodAppCarousel() {
                   image={item.image}
                   name={item.name}
                   price={item.price}
+                  onPress={() => navigation.navigate('FoodDetails')}
                 />
               )}
             />
@@ -110,6 +112,7 @@ export default function FoodAppCarousel() {
                 image={item.image}
                 name={item.name}
                 price={item.price}
+                onPress={() => navigation.navigate('FoodDetails')}
               />
             )}
           />

@@ -1,14 +1,22 @@
-import {View, Text, ImageSourcePropType, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  ImageSourcePropType,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 
 interface Props {
   image: ImageSourcePropType;
   name: string;
   price: string;
+  onPress: () => void;
 }
 export default function PapularCard(props: Props) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <View style={styles.padding}>
         <Image style={styles.image} source={props.image} />
       </View>
@@ -16,10 +24,12 @@ export default function PapularCard(props: Props) {
         <Text style={styles.name}>{props.name}</Text>
         <View style={styles.flexRow}>
           <Text style={styles.price}>{props.price}</Text>
-          <Image source={require('../../screens/foodAppCarousel/img/add.png')}/>
+          <Image
+            source={require('../../screens/foodAppCarousel/img/add.png')}
+          />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -50,10 +60,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'black',
   },
-  flexRow:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    marginTop:5
-  }
+  flexRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 5,
+  },
 });
