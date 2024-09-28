@@ -42,12 +42,7 @@ const Card = ({item, index, scrollX}: any) => {
 
   return (
     <Animated.View style={[styles.card, {transform: [{translateY: scale}]}]}>
-      <TouchableOpacity
-        onPress={() => {
-          nav.navigate('DetailScreen', {data: item});
-        }}>
         <Image source={item.image} style={styles.image} />
-      </TouchableOpacity>
     </Animated.View>
   );
 };
