@@ -24,7 +24,7 @@ export default function FoodDetailsCard({image, scrollX, index}: Props) {
   });
   const opacity = scrollX.interpolate({
     inputRange,
-    outputRange: [0.3, 1, 0.3],
+    outputRange: [0, 1, 0],
     extrapolate: 'clamp',
   });
   const imageRotate = scrollX.interpolate({
@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -14,
-    marginLeft: 1,
   },
   imageContainer: {
     width: width * 0.6 + 20,

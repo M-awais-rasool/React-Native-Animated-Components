@@ -3,6 +3,11 @@ export const DATA = [
     iconText: 'Carousels',
     items: [
       {
+        label: '3D Carousel',
+        backgroundColor: '#9500ff',
+        screen: 'Carousel3DScreen',
+      },
+      {
         label: "Rotate Carousel",
         backgroundColor: '#0ad2ff',
         screen: 'Airbnb',
@@ -16,6 +21,11 @@ export const DATA = [
         label: 'left side Carousel',
         backgroundColor: '#9500ff',
         screen: 'NFCReader',
+      },
+      {
+        label: 'Dots Animation',
+        backgroundColor: '#9500ff',
+        screen: 'DotsAnimation',
       },
     ],
   },
