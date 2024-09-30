@@ -1,25 +1,30 @@
 import React, {useEffect, useRef} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
   Image,
   Animated,
+  Text,
 } from 'react-native';
 import {pizza} from './Data';
 import {
+  CustomTabs,
   DetailsHeading,
+  FoodDescription,
+  FoodDetailsBtn,
   FoodDetailsCard,
 } from '../../components/FoodAppCarousel';
-import Animate, {FadeInLeft, FadeInRight} from 'react-native-reanimated';
+import Animate, {
+  FadeInDown,
+  FadeInLeft,
+  FadeInRight,
+} from 'react-native-reanimated';
 
 const {width} = Dimensions.get('window');
 
 export default function FoodDetails() {
   const scrollX = useRef(new Animated.Value(0)).current;
-  const scroll = useRef(new Animated.Value(0)).current;
   const positionX = useRef(new Animated.Value(width)).current;
 
   useEffect(() => {
@@ -32,10 +37,7 @@ export default function FoodDetails() {
   }, []);
   return (
     <View style={styles.container}>
-      {/* <View style={styles.header}> */}
-        <DetailsHeading scrollX={scrollX} data={pizza} />
-        
-      {/* </View> */}
+      <DetailsHeading scrollX={scrollX} data={pizza} />
       <View style={styles.carouselContainer}>
         <Animate.View
           style={styles.leafImg}
@@ -48,7 +50,10 @@ export default function FoodDetails() {
         <Animate.View
           style={styles.leafImg1}
           entering={FadeInRight.duration(1000).springify()}>
-          <Animate.Image style={styles.img} source={require('./img/leaf1.png')} />
+          <Animate.Image
+            style={styles.img}
+            source={require('./img/leaf1.png')}
+          />
         </Animate.View>
         <Animate.View
           entering={FadeInLeft.duration(1000).springify()}
@@ -92,6 +97,17 @@ export default function FoodDetails() {
           <Image source={require('./img/wood.png')} style={styles.boardImg} />
         </View>
       </View>
+      <Animate.View
+        style={styles.paddiing}
+        entering={FadeInDown.delay(350).springify()}>
+        <FoodDescription />
+        <CustomTabs />
+        <Text>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry.
+        </Text>
+      </Animate.View>
+      <FoodDetailsBtn onPress={()=>{}}/>
     </View>
   );
 }
@@ -106,6 +122,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 20,
     paddingHorizontal: 10,
+  },
+  paddiing: {
+    paddingHorizontal: 20,
   },
   headerText: {
     fontSize: 18,

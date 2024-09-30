@@ -5,6 +5,7 @@ import {
   Dimensions,
   Animated,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import React from 'react';
 const {width} = Dimensions.get('window');
@@ -21,10 +22,12 @@ export default function DetailsHeading(pros: Props) {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Text>{'<'}</Text>
+        <Image
+          source={require('../../screens/foodAppCarousel/img/back-arrow.png')}
+        />
       </TouchableOpacity>
       <Animated.View
-        style={{transform: [{translateY: translateY}], rowGap: 15,height:40}}>
+        style={{transform: [{translateY: translateY}], rowGap: 15, height: 40}}>
         {pros?.data?.map(({name}: any, index: any) => {
           return (
             <View key={index}>
@@ -34,7 +37,7 @@ export default function DetailsHeading(pros: Props) {
         })}
       </Animated.View>
       <TouchableOpacity>
-        <Text>♡</Text>
+        <Image source={require('../../screens/foodAppCarousel/img/cart.png')} />
       </TouchableOpacity>
     </View>
   );
@@ -53,6 +56,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: 'black',
-    marginTop:12
+    marginTop: 12,
   },
 });
