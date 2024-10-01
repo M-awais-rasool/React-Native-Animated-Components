@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     gap: 10,
     borderWidth: 0.5,
     borderColor: '#D2D2D2',
+    shadowColor: '#000', 
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.1, 
+    shadowRadius: 5, 
   },
   image: {
     width: 30,

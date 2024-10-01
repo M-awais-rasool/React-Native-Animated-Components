@@ -43,6 +43,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: '#D2D2D2',
+    shadowColor: '#000', 
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.1, 
+    shadowRadius: 5, 
   },
   image: {
     width: 320,

@@ -6,8 +6,7 @@ import DetailsHeading from './DetailsHeading';
 import CustomTabs from './CustomTabs';
 import FoodDescription from './FoodDescription';
 import FoodDetailsBtn from './FoodDetailsBtn';
-
-
+import PizzaCard from './PizzaCard';
 
 
 export {
@@ -18,5 +17,6 @@ export {
   DetailsHeading,
   CustomTabs,
   FoodDescription,
-  FoodDetailsBtn
+  FoodDetailsBtn,
+  PizzaCard
 };

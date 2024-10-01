@@ -1,5 +1,15 @@
 export const DATA = [
   {
+    iconText: 'Expanding Components',
+    items: [
+      {
+        label: 'Expanding Search',
+        backgroundColor: '#02A9DD',
+        screen: 'ExpandingSearchBar',
+      },
+    ],
+  },
+  {
     iconText: 'Carousels',
     items: [
       {
@@ -8,7 +18,7 @@ export const DATA = [
         screen: 'Carousel3DScreen',
       },
       {
-        label: "Rotate Carousel",
+        label: 'Rotate Carousel',
         backgroundColor: '#0ad2ff',
         screen: 'Airbnb',
       },
@@ -33,7 +43,7 @@ export const DATA = [
     iconText: 'Apps',
     items: [
       {
-        label: "Food App with animated Carousel",
+        label: 'Food App with animated Carousel',
         backgroundColor: '#e68c18',
         screen: 'FoddAppCarousel',
       },
@@ -51,7 +61,6 @@ export const DATA = [
   },
 ];
 
-
 // colors: {
 
 //   appColor:'#6A1B9A',
@@ -64,9 +73,9 @@ export const DATA = [
 //   inputBackground: '#EAEAEA',
 //   separatorColor: '#F0F0F0',
 //   appIconColor: '#01001E',
-  
+
 //   red_notification: '#F72020',
-//   session: '#FFCD6B', 
+//   session: '#FFCD6B',
 //   Option: '#0DE1F6',
 //   Meeting: '#5539CC',
 //   InputTextBg:'#F5F1F5',
@@ -79,7 +88,6 @@ export const DATA = [
 
 //   bgColor1: '#F6EFF7',
 //   bgColor2: '#E8F2FA',
- 
 
 //   bgHeading1: '#F8F1DD',
 //   bgHeading2: '#DDF1EC',
@@ -90,7 +98,6 @@ export const DATA = [
 //   bgColor37: '#F9F9F9',
 //   bgColor38: '#35023887',
 
-
 //   // transparency colors
 //   transColor1: '#ffffff7a',
 
@@ -99,6 +106,5 @@ export const DATA = [
 //   textColor29: '#03192C',
 //   textColor30: '#02A9DD',
 //   textColor31: '#414040',
-
 
 // },

@@ -6,13 +6,14 @@ import CoffeApp from '../screens/coffeApp/CoffeApp';
 import FoodDetails from '../screens/foodAppCarousel/FoodDetails';
 import Carousel3DScreen from '../screens/3DCarousel/Carousel3DScreen';
 import DotsAnimation from '../screens/dotsAnimation/DotsAnimation';
-import { SafeAreaView } from 'react-native';
+import {SafeAreaView} from 'react-native';
+import ExpandingSearchBar from '../screens/expandingSearchBar/ExpandingSearchBar';
 
 const Stack = createStackNavigator();
 
 const AuthStackNavigation = () => {
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex: 1}}>
       <Stack.Navigator
         initialRouteName={'home'}
         screenOptions={({navigation, route}) => ({})}>
@@ -21,7 +22,12 @@ const AuthStackNavigation = () => {
           component={Home}
           options={{headerShown: false}}
         />
-
+        {/* Expanding app */}
+        <Stack.Screen
+          name={'ExpandingSearchBar'}
+          component={ExpandingSearchBar}
+          options={{headerShown: false}}
+        />
         {/* carousels */}
         <Stack.Screen
           name={'Carousel3DScreen'}
