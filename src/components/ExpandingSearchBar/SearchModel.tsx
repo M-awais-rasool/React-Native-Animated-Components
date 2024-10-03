@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {
   View,
   Text,
@@ -7,8 +7,11 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  Animated,
+  Easing,
+  Dimensions,
 } from 'react-native';
-
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PRODUCT_DATA = [
   {
     id: '1',
@@ -59,8 +62,7 @@ interface ProductModalProps {
   searchText: string;
 }
 
-const SearchModel: React.FC<ProductModalProps> = ({
-  visible,
+const SearchModelContent: React.FC<ProductModalProps> = ({
   onClose,
   onProductSelect,
   searchText,
@@ -75,37 +77,76 @@ const SearchModel: React.FC<ProductModalProps> = ({
     });
   }, [searchText]);
 
-  if (!visible) return null;
-
   const handleProductPress = (product: any) => {
     console.log('Selected product:', product);
     onProductSelect();
   };
 
   return (
-    <View style={styles.modalContainer}>
-      <FlatList
-        keyboardShouldPersistTaps="handled"
-        data={filteredProducts}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.productItem}
-            onPress={() => handleProductPress(item)}>
-            <Image source={{uri: item.image}} style={styles.productImage} />
-            <View style={styles.productInfo}>
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.productBrand}>{item.brand}</Text>
-              <Text style={styles.productPrice}>{item.price}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={() => (
-          <Text style={styles.noResults}>No products found</Text>
-        )}
-      />
-    </View>
+    <FlatList
+      keyboardShouldPersistTaps="handled"
+      data={filteredProducts}
+      keyExtractor={item => item.id}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          style={styles.productItem}
+          onPress={() => handleProductPress(item)}
+        >
+          <Image source={{ uri: item.image }} style={styles.productImage} />
+          <View style={styles.productInfo}>
+            <Text style={styles.productName}>{item.name}</Text>
+            <Text style={styles.productBrand}>{item.brand}</Text>
+            <Text style={styles.productPrice}>{item.price}</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+      ListEmptyComponent={() => (
+        <Text style={styles.noResults}>No products found</Text>
+      )}
+    />
   );
+};
+
+const AnimatedSearchModelWrapper: React.FC<ProductModalProps> = ({ visible, ...props }) => {
+  const animatedValue = useRef(new Animated.Value(visible ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.timing(animatedValue, {
+      toValue: visible ? 1 : 0,
+      duration: 300,
+      easing: Easing.inOut(Easing.cubic),
+      useNativeDriver: true,
+    }).start();
+  }, [visible]);
+
+  const translateY = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [SCREEN_HEIGHT, 0],
+  });
+
+  const opacity = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  return (
+    <Animated.View
+      style={[
+        styles.modalContainer,
+        {
+          opacity,
+          transform: [{ translateY }],
+        },
+      ]}
+      pointerEvents={visible ? 'auto' : 'none'}
+    >
+      <SearchModelContent visible={visible} {...props} />
+    </Animated.View>
+  );
+};
+
+const SearchModel: React.FC<ProductModalProps> = (props) => {
+  return <AnimatedSearchModelWrapper {...props} />;
 };
 
 const styles = StyleSheet.create({
@@ -118,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     maxHeight: 400,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,

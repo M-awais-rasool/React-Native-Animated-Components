@@ -15,33 +15,43 @@ import { SearchModel } from '../../components/ExpandingSearchBar';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SEARCH_ICON_SIZE = 50;
-const EXPANDED_WIDTH = SCREEN_WIDTH - 20;
-const BASE_COLOR = 'rgba(255, 63, 108, 0.8)';
-const GRADIENT_START = 'rgba(253, 241, 244, 1)';
-const GRADIENT_END = 'rgba(255, 63, 108, 0.9)';
-const ICON_COLOR = 'rgba(255, 255, 255, 1)';
-const RIPPLE_COLOR = 'rgba(255, 63, 108, 0.2)';
+const EXPANDED_WIDTH = SCREEN_WIDTH - 100;
+const BASE_COLOR = 'rgba(252, 176, 69, 0.8)';
+const GRADIENT_START = 'rgba(255, 255, 255, 1)';
+const GRADIENT_END = 'rgba(252, 176, 69, 0.9)';
+const ICON_COLOR = 'rgba(0, 0, 0, 1)';
+const RIPPLE_COLOR = 'rgba(252, 176, 69, 0.2)';
 
 const ExpandingSearchBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchText, setSearchText] = useState('');
   const inputRef :any= useRef(null);
-  const progress :any= useRef(new Animated.Value(0)).current;
-  const ripple1 :any= useRef(new Animated.Value(0)).current;
-  const ripple2 :any= useRef(new Animated.Value(0)).current;
-  const ripple3 :any= useRef(new Animated.Value(0)).current;
+  const progress = useRef(new Animated.Value(0)).current;
+  const ripple1 = useRef(new Animated.Value(0)).current;
+  const ripple2 = useRef(new Animated.Value(0)).current;
+  const ripple3 = useRef(new Animated.Value(0)).current;
+  const closeButtonAnimation = useRef(new Animated.Value(0)).current;
 
   const toggleExpansion = () => {
     if (isExpanded && inputRef.current) {
       inputRef.current.blur();
     }
-    Animated.timing(progress, {
-      toValue: isExpanded ? 0 : 1,
-      duration: 300,
-      easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      useNativeDriver: false,
-    }).start();
+    const toValue = isExpanded ? 0 : 1;
+    Animated.parallel([
+      Animated.timing(progress, {
+        toValue,
+        duration: 300,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: false,
+      }),
+      Animated.timing(closeButtonAnimation, {
+        toValue,
+        duration: 700,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: true,
+      }),
+    ]).start();
 
     if (!isExpanded) {
       const rippleAnimation = (ripple:any) => {
@@ -58,7 +68,7 @@ const ExpandingSearchBar = () => {
               duration: 1000,
               useNativeDriver: false,
             }),
-          ])
+          ]),
         ).start();
       };
 
@@ -90,6 +100,24 @@ const ExpandingSearchBar = () => {
     }),
   };
 
+  const closeButtonStyle = {
+    transform: [
+      {
+        translateX: closeButtonAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, EXPANDED_WIDTH-135],
+        }),
+      },
+      {
+        rotate: closeButtonAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '900deg'],
+        }),
+      },
+    ],
+    opacity: closeButtonAnimation,
+  };
+
   const createRippleStyle = (ripple:any) => ({
     width: ripple.interpolate({
       inputRange: [0, 1],
@@ -107,12 +135,14 @@ const ExpandingSearchBar = () => {
       inputRange: [0, 1],
       outputRange: [0.8, 0.3],
     }),
-    transform: [{
-      scale: ripple.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 1.2],
-      }),
-    }],
+    transform: [
+      {
+        scale: ripple.interpolate({
+          inputRange: [0, 1],
+          outputRange: [1, 1.2],
+        }),
+      },
+    ],
   });
 
   const rippleStyle1 = createRippleStyle(ripple1);
@@ -134,12 +164,20 @@ const ExpandingSearchBar = () => {
     setShowModal(false);
     setSearchText('');
     setIsExpanded(false);
-    Animated.timing(progress, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-      useNativeDriver: false,
-    }).start();
+    Animated.parallel([
+      Animated.timing(progress, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: false,
+      }),
+      Animated.timing(closeButtonAnimation, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.bezier(0.4, 0.0, 0.2, 1),
+        useNativeDriver: true,
+      }),
+    ]).start();
     ripple1.setValue(0);
     ripple2.setValue(0);
     ripple3.setValue(0);
@@ -147,26 +185,26 @@ const ExpandingSearchBar = () => {
 
   return (
     <Pressable onPress={toggleExpansion}>
-      <Animated.View style={[styles.container, animatedStyle]}>
-        <LinearGradient
-          colors={[GRADIENT_START, GRADIENT_END]}
-          style={StyleSheet.absoluteFill}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
-        />
-        <Animated.View style={[styles.ripple, rippleStyle1]} />
-        <Animated.View style={[styles.ripple, rippleStyle2]} />
-        <Animated.View style={[styles.ripple, rippleStyle3]} />
-        <View style={styles.iconContainer}>
-          <View style={styles.iconBackground}>
-            <Image
-              source={require('../foodAppCarousel/img/add.png')}
-              style={styles.searchIcon}
-            />
+      <View style={styles.container}>
+        <Animated.View style={[styles.subContainer, animatedStyle,isExpanded&&{left:10}]}>
+          <LinearGradient
+            colors={[GRADIENT_START, GRADIENT_END]}
+            style={StyleSheet.absoluteFill}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          />
+          <Animated.View style={[styles.ripple, rippleStyle1]} />
+          <Animated.View style={[styles.ripple, rippleStyle2]} />
+          <Animated.View style={[styles.ripple, rippleStyle3]} />
+          <View style={styles.iconContainer}>
+            <View style={styles.iconBackground}>
+              <Image
+                source={require('./img/search.png')}
+                style={styles.searchIcon}
+              />
+            </View>
           </View>
-        </View>
-        {isExpanded && (
-          <>
+          {isExpanded && (
             <TextInput
               ref={inputRef}
               style={styles.input}
@@ -175,20 +213,19 @@ const ExpandingSearchBar = () => {
               value={searchText}
               onChangeText={handleTextChange}
             />
-            <TouchableOpacity style={styles.closeButton} onPress={handleCloseModal}>
-              <Image
-                source={require('../foodAppCarousel/img/add.png')}
-                style={styles.closeIcon}
-              />
-            </TouchableOpacity>
-          </>
-        )}
-      </Animated.View>
-      <SearchModel 
-        visible={showModal} 
-        onClose={handleCloseModal} 
+          )}
+        </Animated.View>
+        <Animated.View style={[styles.closeButton, closeButtonStyle]}>
+          <TouchableOpacity onPress={handleCloseModal}>
+            <Image source={require('./img/cross.png')} style={styles.closeIcon} />
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
+      <SearchModel
+        visible={showModal}
+        onClose={handleCloseModal}
         onProductSelect={handleProductSelect}
-        searchText={searchText} 
+        searchText={searchText}
       />
     </Pressable>
   );
@@ -196,13 +233,18 @@ const ExpandingSearchBar = () => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  subContainer: {
     position: 'absolute',
     top: 10,
-    right: 10,
     height: SEARCH_ICON_SIZE,
     borderRadius: SEARCH_ICON_SIZE / 2,
     overflow: 'hidden',
     justifyContent: 'center',
+    alignSelf:'center',
   },
   ripple: {
     position: 'absolute',
@@ -212,7 +254,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     position: 'absolute',
-    left: 0,
+    right: 0,
     top: 0,
     width: SEARCH_ICON_SIZE,
     height: SEARCH_ICON_SIZE,
@@ -243,18 +285,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   closeButton: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
     width: SEARCH_ICON_SIZE,
     height: SEARCH_ICON_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: -1,
+    marginTop:10
   },
   closeIcon: {
     width: SEARCH_ICON_SIZE * 0.4,
     height: SEARCH_ICON_SIZE * 0.4,
-    tintColor: ICON_COLOR,
   },
 });
 
