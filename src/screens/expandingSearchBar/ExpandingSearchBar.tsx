@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -11,9 +11,9 @@ import {
   Easing,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { SearchModel } from '../../components/ExpandingSearchBar';
+import {SearchModel} from '../../components/ExpandingSearchBar';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
 const SEARCH_ICON_SIZE = 50;
 const EXPANDED_WIDTH = SCREEN_WIDTH - 100;
 const BASE_COLOR = 'rgba(252, 176, 69, 0.8)';
@@ -26,7 +26,7 @@ const ExpandingSearchBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const inputRef :any= useRef(null);
+  const inputRef: any = useRef(null);
   const progress = useRef(new Animated.Value(0)).current;
   const ripple1 = useRef(new Animated.Value(0)).current;
   const ripple2 = useRef(new Animated.Value(0)).current;
@@ -54,7 +54,7 @@ const ExpandingSearchBar = () => {
     ]).start();
 
     if (!isExpanded) {
-      const rippleAnimation = (ripple:any) => {
+      const rippleAnimation = (ripple: any) => {
         Animated.loop(
           Animated.sequence([
             Animated.timing(ripple, {
@@ -105,7 +105,7 @@ const ExpandingSearchBar = () => {
       {
         translateX: closeButtonAnimation.interpolate({
           inputRange: [0, 1],
-          outputRange: [0, EXPANDED_WIDTH-135],
+          outputRange: [0, EXPANDED_WIDTH - 135],
         }),
       },
       {
@@ -118,7 +118,7 @@ const ExpandingSearchBar = () => {
     opacity: closeButtonAnimation,
   };
 
-  const createRippleStyle = (ripple:any) => ({
+  const createRippleStyle = (ripple: any) => ({
     width: ripple.interpolate({
       inputRange: [0, 1],
       outputRange: [SEARCH_ICON_SIZE, EXPANDED_WIDTH],
@@ -149,7 +149,7 @@ const ExpandingSearchBar = () => {
   const rippleStyle2 = createRippleStyle(ripple2);
   const rippleStyle3 = createRippleStyle(ripple3);
 
-  const handleTextChange = (text:any) => {
+  const handleTextChange = (text: any) => {
     setSearchText(text);
     setShowModal(text.length > 0);
   };
@@ -184,14 +184,21 @@ const ExpandingSearchBar = () => {
   };
 
   return (
-    <Pressable onPress={toggleExpansion}>
+    <Pressable
+      onPress={toggleExpansion}
+      style={{flex: 1, backgroundColor: '#FFFF'}}>
       <View style={styles.container}>
-        <Animated.View style={[styles.subContainer, animatedStyle,isExpanded&&{left:10}]}>
+        <Animated.View
+          style={[
+            styles.subContainer,
+            animatedStyle,
+            isExpanded && {left: 10},
+          ]}>
           <LinearGradient
             colors={[GRADIENT_START, GRADIENT_END]}
             style={StyleSheet.absoluteFill}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
           />
           <Animated.View style={[styles.ripple, rippleStyle1]} />
           <Animated.View style={[styles.ripple, rippleStyle2]} />
@@ -217,7 +224,10 @@ const ExpandingSearchBar = () => {
         </Animated.View>
         <Animated.View style={[styles.closeButton, closeButtonStyle]}>
           <TouchableOpacity onPress={handleCloseModal}>
-            <Image source={require('./img/cross.png')} style={styles.closeIcon} />
+            <Image
+              source={require('./img/cross.png')}
+              style={styles.closeIcon}
+            />
           </TouchableOpacity>
         </Animated.View>
       </View>
@@ -239,16 +249,16 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     position: 'absolute',
-    top: 10,
+    top: SEARCH_ICON_SIZE,
     height: SEARCH_ICON_SIZE,
     borderRadius: SEARCH_ICON_SIZE / 2,
     overflow: 'hidden',
     justifyContent: 'center',
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   ripple: {
     position: 'absolute',
-    left: 0,
+    // left: 0,
     top: 0,
     backgroundColor: RIPPLE_COLOR,
   },
@@ -290,11 +300,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: -1,
-    marginTop:10
+    marginTop: SEARCH_ICON_SIZE,
   },
   closeIcon: {
-    width: SEARCH_ICON_SIZE * 0.4,
-    height: SEARCH_ICON_SIZE * 0.4,
+    // width: SEARCH_ICON_SIZE * 0.4,
+    // height: SEARCH_ICON_SIZE * 0.4,
   },
 });
 

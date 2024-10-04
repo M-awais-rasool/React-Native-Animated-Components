@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Alert,
   Animated,
   Easing,
   Dimensions,
@@ -17,39 +16,39 @@ const PRODUCT_DATA = [
     id: '1',
     name: 'Slim Fit Shirt',
     brand: 'Roadster',
-    price: '₹799',
+    price: '₹199',
     image:
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQS76fl8ZTik7jQfUCzvFkFKzQFywvTK0NqQ&s',
   },
   {
     id: '2',
     name: 'Printed T-Shirt',
     brand: 'HRX',
-    price: '₹499',
+    price: '₹999',
     image:
-      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80',
+      'https://shopgroove.pk/cdn/shop/products/Short-Sleeve-T-Shirt-Men-S-For-2021-Summer-Print-Black-White-Tshirt-Top-Tees-Classic-1.jpg?v=1664899421',
   },
   {
     id: '3',
     name: 'Skinny Jeans',
     brand: 'Levis',
-    price: '₹1999',
+    price: '₹199',
     image:
-      'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80',
+      'https://images.onlyandsons.com/22029095/4451772/007/onlysons-onswarpskinnywb9095dccdnmnoos-black.jpg?v=4bc61ffea1c0e91b2992bbad32df97f3&format=webp&width=1280&quality=90&key=25-0-3',
   },
   {
     id: '4',
     name: 'Running Shoes',
     brand: 'Nike',
-    price: '₹3995',
+    price: '₹295',
     image:
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLHE0yWwnQRlY8EeksEPbkEOBCvOfXYL8stg&s',
   },
   {
     id: '5',
     name: 'Casual Watch',
     brand: 'Fossil',
-    price: '₹8995',
+    price: '₹995',
     image:
       'https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80',
   },
@@ -152,7 +151,7 @@ const SearchModel: React.FC<ProductModalProps> = (props) => {
 const styles = StyleSheet.create({
   modalContainer: {
     position: 'absolute',
-    top: 70,
+    top: 120,
     left: 10,
     right: 10,
     backgroundColor: '#ffffff',
