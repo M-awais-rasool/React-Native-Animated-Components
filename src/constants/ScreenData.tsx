@@ -53,9 +53,9 @@ export const DATA = [
         screen: 'CoffeApp',
       },
       {
-        label: 'iOS NFC Reader',
-        backgroundColor: '#9500ff',
-        screen: 'NFCReader',
+        label: 'Animated Donut App',
+        backgroundColor: '#eda9b9',
+        screen: 'donutApp',
       },
     ],
   },
