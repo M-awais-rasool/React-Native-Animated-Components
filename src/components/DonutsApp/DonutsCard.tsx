@@ -7,6 +7,7 @@ import {
   Text,
   Easing,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 
@@ -19,12 +20,24 @@ interface Props {
   item: any;
   index: any;
   scrollX: any;
+  isExpanded: boolean;
+  setIsExpanded: (i: boolean) => void;
+  toggle: () => void;
+  onPress: () => void;
 }
-const DonutsCard = ({item, index, scrollX}: Props) => {
+const DonutsCard = ({
+  item,
+  index,
+  scrollX,
+  isExpanded,
+  setIsExpanded,
+  toggle,
+  onPress,
+}: Props) => {
   const progress = useRef(new Animated.Value(0)).current;
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = () => {
+    toggle();
     const toValue = isExpanded ? 0 : 1;
     Animated.parallel([
       Animated.timing(progress, {
@@ -64,10 +77,12 @@ const DonutsCard = ({item, index, scrollX}: Props) => {
   return (
     <Animated.View
       style={[styles.itemContainer, {transform: [{translateY: scale}]}]}>
-      <Animated.Image
-        source={{uri: item.image}}
-        style={[styles.image, {transform: [{rotate}]}]}
-      />
+      <Pressable onPress={onPress}>
+        <Animated.Image
+          source={item.image}
+          style={[styles.image,]}
+        />
+      </Pressable>
       <TouchableOpacity
         onPress={() => {
           toggleExpansion();
