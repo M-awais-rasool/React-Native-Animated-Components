@@ -7,6 +7,11 @@ export const DATA = [
         backgroundColor: '#02A9DD',
         screen: 'ExpandingSearchBar',
       },
+      {
+        label: 'Animated Lamp',
+        backgroundColor: '#02A9DD',
+        screen: 'AnimatedLamp',
+      },
     ],
   },
   {

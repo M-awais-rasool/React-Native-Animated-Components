@@ -9,12 +9,13 @@ import DotsAnimation from '../screens/dotsAnimation/DotsAnimation';
 import {SafeAreaView} from 'react-native';
 import ExpandingSearchBar from '../screens/expandingSearchBar/ExpandingSearchBar';
 import DonutsApp from '../screens/donutsApp/DonutsApp';
+import AnimatedLamp from '../screens/animatedLamp/AnimatedLamp';
 
 const Stack = createStackNavigator();
 
 const AuthStackNavigation = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    // <SafeAreaView style={{flex: 1}}>
       <Stack.Navigator
         initialRouteName={'home'}
         screenOptions={({navigation, route}) => ({})}>
@@ -27,6 +28,11 @@ const AuthStackNavigation = () => {
         <Stack.Screen
           name={'ExpandingSearchBar'}
           component={ExpandingSearchBar}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name={'AnimatedLamp'}
+          component={AnimatedLamp}
           options={{headerShown: false}}
         />
         {/* carousels */}
@@ -66,7 +72,7 @@ const AuthStackNavigation = () => {
           options={{headerShown: false}}
         />
       </Stack.Navigator>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
