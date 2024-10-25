@@ -23,21 +23,6 @@ export const DATA = [
         screen: 'Carousel3DScreen',
       },
       {
-        label: 'Rotate Carousel',
-        backgroundColor: '#0ad2ff',
-        screen: 'Airbnb',
-      },
-      {
-        label: 'image Carousel',
-        backgroundColor: '#2962ff',
-        screen: 'ShutdownIOS',
-      },
-      {
-        label: 'left side Carousel',
-        backgroundColor: '#9500ff',
-        screen: 'NFCReader',
-      },
-      {
         label: 'Dots Animation',
         backgroundColor: '#9500ff',
         screen: 'DotsAnimation',
