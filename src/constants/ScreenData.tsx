@@ -12,6 +12,11 @@ export const DATA = [
         backgroundColor: '#02A9DD',
         screen: 'AnimatedLamp',
       },
+      {
+        label: 'Fade Item Out',
+        backgroundColor: '#ff0059',
+        screen: 'FadeItem',
+      },
     ],
   },
   {
