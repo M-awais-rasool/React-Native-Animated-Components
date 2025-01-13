@@ -1,5 +1,7 @@
 # 1-Animation
-![Animations](https://github.com/user-attachments/assets/9914dd89-99d9-4d72-88af-b17faa6ba063)
+<p >
+  <img src="https://github.com/user-attachments/assets/9914dd89-99d9-4d72-88af-b17faa6ba063" alt="Animations" width="500" height="300" />
+</p>
 
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
