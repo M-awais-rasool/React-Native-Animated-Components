@@ -5,23 +5,29 @@
 
 # Animation 2
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/01b1b1a7-4f20-48df-affd-9b9cae29605b" alt="Animations" width="300" height="600" />
+  <img src="https://github.com/user-attachments/assets/dadbac17-dd0b-4dc9-a7ba-1eca32a67eca" alt="Animations" width="300" height="600" />
 </div>
 
 # Animation 3
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bc20a96c-2f13-47bb-91af-253d5d327670" alt="Animations" width="300" height="600" />
+  <img src="https://github.com/user-attachments/assets/97302a60-d543-4fd0-abdd-01206718fecd" alt="Animations" width="300" height="600" />
 </div>
 
 # Animation 4
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/5d2963c6-1254-43e1-a9b0-d77ffce6107e" alt="Animations" width="300" height="600" />
+  <img src="https://github.com/user-attachments/assets/bc20a96c-2f13-47bb-91af-253d5d327670" alt="Animations" width="300" height="600" />
 </div>
 
 # Animation 5
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/97302a60-d543-4fd0-abdd-01206718fecd" alt="Animations" width="300" height="600" />
+  <img src="https://github.com/user-attachments/assets/5d2963c6-1254-43e1-a9b0-d77ffce6107e" alt="Animations" width="300" height="600" />
 </div>
+
+# Animation 6
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/01b1b1a7-4f20-48df-affd-9b9cae29605b" alt="Animations" width="300" height="600" />
+</div>
+
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
